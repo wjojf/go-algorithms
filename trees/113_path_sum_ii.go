@@ -28,30 +28,12 @@ func dfs(
 
     if root.Left == nil && root.Right == nil {
         if currSum + root.Val == targetSum {
-<<<<<<< HEAD:trees/113_path_sum_ii.go
-            f_p := append(path, root.Val)
-            fmt.Println(f_p)
-            *res = append(*res, f_p)
-            fmt.Println(*res)
-=======
-            path = append(path, root.Val)
-            *res = append(*res, path) // append main variable 
->>>>>>> f81ce9522cd105418b20db316186f6b8c9674095:113_path_sum_ii.go
+            *res = append(*res, append(path, root.Val))
             return
         }
     } else {
         c_s := currSum + root.Val
-        path = append(path, root.Val)
-        dfs(root.Left, targetSum, path, c_s, res)
-        dfs(root.Right, targetSum, path, c_s, res)
+        dfs(root.Left, targetSum, append(path,root.Val), c_s, res)
+        dfs(root.Right, targetSum, append(path,root.Val), c_s, res)
     }
-<<<<<<< HEAD:trees/113_path_sum_ii.go
-
-    c_s := currSum + root.Val
-    p := append(path, root.Val)
-
-    dfs(root.Left, targetSum, p, c_s, res)
-    dfs(root.Right, targetSum, p, c_s, res)
-=======
->>>>>>> f81ce9522cd105418b20db316186f6b8c9674095:113_path_sum_ii.go
 }
