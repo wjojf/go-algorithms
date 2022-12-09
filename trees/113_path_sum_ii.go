@@ -5,6 +5,14 @@ A root-to-leaf path is a path starting from the root and ending at any leaf node
  */
 package main
 
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 import "fmt"
 
 func pathSum(root *TreeNode, targetSum int) [][]int {
@@ -19,21 +27,23 @@ func dfs(
     targetSum int,
     path []int,
     currSum int,
-    res *[][] int){
+    res *[][] int) {
     
-    
+
     if root == nil {
         return
     }
 
+    c_s := currSum + root.Val
     if root.Left == nil && root.Right == nil {
-        if currSum + root.Val == targetSum {
-            *res = append(*res, append(path, root.Val))
+        if c_s == targetSum {
+            tmp := make([]int, len(path))
+            copy(tmp, path)
+            *res = append(*res, append(tmp, root.Val))
             return
         }
     } else {
-        c_s := currSum + root.Val
-        dfs(root.Left, targetSum, append(path,root.Val), c_s, res)
-        dfs(root.Right, targetSum, append(path,root.Val), c_s, res)
+        dfs(root.Left, targetSum, append(path, root.Val), c_s, res)
+        dfs(root.Right, targetSum, append(path, root.Val), c_s, res)
     }
 }
